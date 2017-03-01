@@ -1,0 +1,44 @@
+table {
+	float: left;
+	width: 100%;
+	border-left: 1px solid #000;
+	border-top: 1px solid #000;
+
+	th {
+		background: #000;
+		color: #fff;
+		padding: 10px;
+		cursor: pointer;
+
+		&.active {
+			background-color: #525252;
+		}
+
+		&:last-of-type {
+			cursor: default;
+		}
+	}
+
+	td {
+		padding: 10px;
+		vertical-align: middle;
+		border-right: 1px solid #000;
+		border-bottom: 1px solid #000;
+
+		img {
+			width: 100px;
+			max-height: 100px;
+		}
+
+		&.props {
+			width: 25%;
+		}
+	}
+
+	tr:nth-child(even) {
+		td {
+		background: #efefef;
+
+		}
+	}
+}

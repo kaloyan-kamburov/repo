@@ -1,0 +1,75 @@
+<div>
+	<div class="top-bar">
+		<input type="text" ng-model="userSearch.address" placeholder="Search address"/>
+		<select ng-model="userSelect.rooms">
+			<option value="" selected="selected">Rooms</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
+	</div>
+	<table cellpadding="0" cellspacing="0">
+		<tr ng-repeat="estate in estates | filter: userSearch | filter: userSelect">
+			<td><img ng-src="{{ estate.image | imageAssets }}" /></td>
+			<td class="props">
+				<span>{{estate.address}}</span><br>
+				<span><b>Price:</b> ${{estate.price}}</span><br>
+				<span><b>Rooms:</b> {{estate.rooms}}</span><br><br>
+				<button ng-click="showViewings(estate.id)">Viewings</button>
+			</td>
+			<td class="description">
+				<span>{{estate.description}}</span>
+			</td>
+		</tr>
+	</table>
+
+	<div class="popup" ng-if="viewingsVisible" style="width: 100%">
+		<div class="popup-close" ng-click="hideViewings()">
+			<i class="fa fa-times" aria-hidden="true"></i> 
+		</div>
+		<div class="popup-content">
+			<table style="width: 100%;" cellpadding="0" cellspacing="0">
+				<tr>
+					<th class="ta-l" ng-class="{active: sortType == 'name'}" ng-click="sortTable('name')">Name 
+						<i class="fa fa-chevron-down" ng-if="sortType == 'name' && !sortReverse" aria-hidden="true"></i>
+						<i ng-if="sortType == 'name' && sortReverse" class="fa fa-chevron-up" aria-hidden="true"></i>
+					</th>
+					<th ng-class="{active: sortType == 'time'}" ng-click="sortTable('time')">Time
+						<i class="fa fa-chevron-down" ng-if="sortType == 'time' && !sortReverse" aria-hidden="true"></i>
+						<i ng-if="sortType == 'time' && sortReverse" class="fa fa-chevron-up" aria-hidden="true"></i>
+					</th>
+					<th ng-class="{active: sortType == 'host'}" ng-click="sortTable('host')">Host
+						<i class="fa fa-chevron-down" ng-if="sortType == 'host' && !sortReverse" aria-hidden="true"></i>
+						<i ng-if="sortType == 'host' && sortReverse" class="fa fa-chevron-up" aria-hidden="true"></i>
+					</th>
+					<th>Remove</th>
+				</tr>
+				<tr ng-repeat="member in viewingMembers | orderBy:sortType:sortReverse">
+					<td class="ta-l">{{member.name}}</td>	
+					<td>{{member.time}}</td>	
+					<td>{{member.host}}</td>
+					<td><button class="remove" ng-click="removeViewing(viewingsId, member)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>	
+				</tr>
+			</table>
+			
+			<form class="addViewingForm" ng-submit="addViewing(viewingsId)">
+
+				<input class="name" placeholder="Insert name" type="text" ng-model="viewingData.name"/>
+
+				<input class="time" placeholder="Pick time" ng-model="viewingData.time" datetime-picker date-format="yyyy-MM-dd HH:mm" close-on-select="false"/>
+
+				<!--<select ng-model="viewingData.time">
+					<option value="" selected="selected">Time</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select>-->
+
+				<select ng-model="viewingData.host" ng-options="host.name for host in hosts">
+					<option value="">Select host</option>	
+				</select>
+				
+				<button type="submit" ng-disabled="!viewingData.name || !viewingData.time || !viewingData.host">Add Viewing</button>
+
+			</form>
+		</div>
+	</div>
+</div>

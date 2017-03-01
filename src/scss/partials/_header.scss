@@ -1,0 +1,35 @@
+header {
+	float: left;
+	width: 100%;
+
+	nav {
+		float: left; 
+		width: 100%;
+		display: table;
+		border-bottom: 1px solid #000;
+
+		ul {
+			display: table-row;
+			list-style-type: none;
+
+			li {
+				display: table-cell;
+				
+				a {
+					float: left;
+					width: 100%;
+					text-align: center;
+					padding: 10px;
+					text-decoration: none;
+					background: #fff;
+					color: #000;
+
+					&.active {
+						color: #fff;
+						background: #000;
+					}
+				}
+			} 
+		}
+	}
+}
