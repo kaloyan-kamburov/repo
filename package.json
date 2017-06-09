@@ -1,13 +1,13 @@
 {
-  "name": "thtask",
+  "name": "hahatask",
   "version": "1.0.0",
-  "description": "TechHuddle Angular1 task",
+  "description": "task",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "TechHuddle",
+    "task",
     "Angular1"
   ],
   "author": "Kaloyan Kamburov",
